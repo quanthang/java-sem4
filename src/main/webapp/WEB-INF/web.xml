@@ -55,6 +55,22 @@
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddSession</servlet-name>
+        <servlet-class>com.example.t2009m1_helloworld.controller.ssdemo.AddSessionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSession</servlet-name>
+        <url-pattern>/session/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GetAddSession</servlet-name>
+        <servlet-class>com.example.t2009m1_helloworld.controller.ssdemo.GetSessionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetAddSession</servlet-name>
+        <url-pattern>getsession</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

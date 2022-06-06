@@ -5,6 +5,10 @@ import com.example.t2009m1_helloworld.entity.Product;
 import java.util.List;
 
 public interface ProductModel {
+    static Product finById(Integer productId) {
+        return null;
+    }
+
     boolean save(Product product);
     boolean update(int id, Product product);
     boolean delete(int id);
