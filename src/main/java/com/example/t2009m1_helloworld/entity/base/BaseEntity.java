@@ -89,5 +89,7 @@ public abstract class BaseEntity {
     public void setProductStatus(ProductStatus productStatus) {
         this.status = productStatus;
     }
+
+    public abstract String getPassword(String s);
 }
 

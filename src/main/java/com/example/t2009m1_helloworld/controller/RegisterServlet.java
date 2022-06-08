@@ -1,9 +1,9 @@
 package com.example.t2009m1_helloworld.controller;
 
-import com.example.t2009m1_helloworld.Model.MySqlUserModel;
-import com.example.t2009m1_helloworld.Model.User;
-import com.example.t2009m1_helloworld.entity.Account;
-import com.example.t2009m1_helloworld.entity.Student;
+
+
+import com.example.t2009m1_helloworld.entity.Accounts;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,17 +22,29 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-       String username = req.getParameter("username");
-       String passwordHash = req.getParameter("passwordHash");
-       Integer status = Integer.parseInt(req.getParameter("status"));
-       User user = new User();
-        user.setUsername(username);
-        user.setPasswordHash(passwordHash);
-        user.setStatus(status);
-        MySqlUserModel mySqlUserModel = new MySqlUserModel();
-        boolean result = mySqlUserModel.save(user);
-        System.out.println(result);
-       req.setAttribute("user", user);
-       req.getRequestDispatcher("/User/Register-success.jsp").forward(req, resp);
+      String username = req.getParameter("username");
+      String password = req.getParameter("password");
+      String email = req.getParameter("email");
+      String confirmPassword = req.getParameter("confirmPassword");
+      String fullName = req.getParameter("fullName");
+      Accounts accounts = Accounts.AccountBuilder.anAccount()
+              .withUsername(username)
+              .withPassword(password)
+              .withEmail(email)
+              .withConfirmPassword(confirmPassword)
+              .withFullName(fullName)
+              .build();
+      if (!accounts.isValid()){
+          req.setAttribute("account", accounts);
+
+          req.setAttribute("erros", getError());
+          req.getRequestDispatcher("/User/Register.jsp").forward(req, resp);
+          return;
+      }
+      accounts = accountService.register(accounts);
+      req.setAttribute("account",accounts);
+      req.getRequestDispatcher("/User/Register-success.jsp").forward(req, resp);
     }
+
+
 }

@@ -12,7 +12,7 @@ public class ListProductClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.setAttribute("products", productModel.finAll());
+        req.setAttribute("products", productModel.getClass());
         req.getRequestDispatcher("/client/products/list.jsp");
     }
 }
